@@ -240,9 +240,9 @@
 						</nav>
 						<!-- partial -->
 						<div class="main-panel">
-								<div class="content-wrapper">
-										{{ $slot }}
-								</div>
+								{{-- <div class="content-wrapper">
+                                </div> --}}
+								{{ $slot }}
 								<!-- content-wrapper ends -->
 								<!-- partial:../../partials/_footer.html -->
 								<footer class="footer">
