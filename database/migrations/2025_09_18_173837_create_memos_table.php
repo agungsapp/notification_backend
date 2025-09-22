@@ -14,11 +14,20 @@ return new class extends Migration
         Schema::create('memos', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('content');
+            $table->text('body');
             $table->foreignId('sender_id')->constrained('users')->cascadeOnDelete();
+            $table->enum('priority', ['low', 'normal', 'high'])->default('normal');
             $table->enum('status', ['draft', 'sent'])->default('draft');
             $table->timestamp('sent_at')->nullable();
             $table->timestamps();
+        });
+
+        Schema::create('memo_reads', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('memo_id')->constrained('memos')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->timestamp('read_at')->nullable();
+            $table->unique(['memo_id', 'user_id']);
         });
     }
 
@@ -27,6 +36,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('memo_reads');
         Schema::dropIfExists('memos');
     }
 };

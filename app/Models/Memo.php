@@ -8,8 +8,9 @@ class Memo extends Model
 {
     protected $fillable = [
         'title',
-        'content',
+        'body',
         'sender_id',
+        'priority',
         'status',
         'sent_at'
     ];
@@ -17,5 +18,10 @@ class Memo extends Model
     public function sender()
     {
         return $this->belongsTo(User::class, 'sender_id');
+    }
+
+    public function reads()
+    {
+        return $this->hasMany(MemoRead::class);
     }
 }
