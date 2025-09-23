@@ -7,7 +7,7 @@
 												<div class="brand-logo mb-3 text-center">
 														<img src="{{ asset('assets/images/logo.svg') }}" alt="logo">
 												</div>
-												<h4 class="text-center">Hello! Let's get started</h4>
+												<h4 class="text-center">silahkan masuk</h4>
 												<h6 class="font-weight-light text-center">Sign in to continue.</h6>
 
 												<form class="pt-3" wire:submit.prevent="login">
@@ -33,7 +33,7 @@
 
 														<div class="d-grid mt-3 gap-2">
 																<button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
-																		SIGN IN
+																		MASUK
 																</button>
 														</div>
 												</form>

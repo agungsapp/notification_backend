@@ -16,27 +16,62 @@ class UserSeeder extends Seeder
     {
         $data = [
             [
+                'name' => 'owner',
+                'email' => 'owner@gmail.com',
+                'password' => Hash::make('admin123'),
+                'role' => 'admin',
+                'position' => 'owner',
+                'supervisor_id' => null,
+            ],
+            [
                 'name' => 'admin',
                 'email' => 'admin@gmail.com',
                 'password' => Hash::make('admin123'),
                 'role' => 'admin',
+                'position' => 'hrd',
+                'supervisor_id' => 1,
             ],
             [
-                'name' => 'spv',
-                'email' => 'spv@gmail.com',
+                'name' => 'manager',
+                'email' => 'manager@gmail.com',
                 'password' => Hash::make('admin123'),
-                'role' => 'spv',
+                'role' => 'manager',
+                'position' => 'manager',
+                'supervisor_id' => 2,
+            ],
+            [
+                'name' => 'pic',
+                'email' => 'pic@gmail.com',
+                'password' => Hash::make('admin123'),
+                'role' => 'employee',
+                'position' => 'pic',
+                'supervisor_id' => 3,
             ],
             [
                 'name' => 'pegawai',
                 'email' => 'pegawai@gmail.com',
                 'password' => Hash::make('admin123'),
-                'role' => 'pegawai',
+                'role' => 'employee',
+                'position' => 'staff',
+                'supervisor_id' => 3,
             ],
         ];
 
         foreach ($data as $item) {
-            User::create($item);
+            if ($item['position'] == 'staff') {
+                for ($i = 1; $i <= 10; $i++) {
+                    User::create([
+                        'name' => 'pegawai' . $i,
+                        'email' => 'pegawai' . $i . '@gmail.com',
+                        'password' => Hash::make('admin123'),
+                        'role' => 'employee',
+                        'position' => 'staff',
+                        'supervisor_id' => 3,
+                    ]);
+                }
+            } else {
+                User::create($item);
+            }
         }
     }
 }
