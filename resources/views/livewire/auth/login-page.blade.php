@@ -5,10 +5,10 @@
 								<div class="col-lg-4 mx-auto">
 										<div class="auth-form-light px-sm-5 px-4 py-5 text-left">
 												<div class="brand-logo mb-3 text-center">
-														<img src="{{ asset('assets/images/logo.svg') }}" alt="logo">
+														<img src="{{ asset('in/logo.png') }}" alt="logo wahaha">
 												</div>
-												<h4 class="text-center">silahkan masuk</h4>
-												<h6 class="font-weight-light text-center">Sign in to continue.</h6>
+												<h4 class="text-center">Masukan email dan password untuk masuk</h4>
+												{{-- <h6 class="font-weight-light text-center">Sign in to continue.</h6> --}}
 
 												<form class="pt-3" wire:submit.prevent="login">
 														<div class="form-group">
