@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Evaluation extends Model
 {
@@ -16,5 +17,9 @@ class Evaluation extends Model
     public function evaluator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'employee_id');
+    }
+    public function evaluasiAns(): HasMany
+    {
+        return $this->hasMany(EvaluationAnswer::class, 'evaluation_id');
     }
 }
