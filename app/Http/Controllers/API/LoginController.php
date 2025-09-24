@@ -37,6 +37,14 @@ class LoginController extends Controller
             ], 401);
         }
 
+
+        if ($user->role !== 'employee') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Selain PIC dan Tim tidak di ijinkan login'
+            ], 401);
+        }
+
         $token = $user->createToken('auth_token')->plainTextToken;
         Log::info([
             'status' => true,

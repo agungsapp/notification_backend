@@ -20,11 +20,14 @@ class LoginPage extends Component
 
     public function render()
     {
+        // dd("oke");
         return view('livewire.auth.login-page'); // pakai layout kosong
     }
 
     public function login()
     {
+
+        // dd("masuk");
         $this->validate();
 
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
