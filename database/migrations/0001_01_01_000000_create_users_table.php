@@ -17,10 +17,26 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('role', ['admin', 'spv', 'pegawai'])->default('pegawai');
+
+            // Kolom role → menentukan akses sistem
+            $table->enum('role', ['admin', 'manager', 'employee'])->default('employee');
+            // admin   → bisa login web & kelola user, memo, evaluasi
+            // manager → bisa login web & buat evaluasi
+            // employee → hanya login mobile (PIC & staff)
+
+            // Kolom position → menentukan jabatan di hierarki perusahaan
+            $table->enum('position', ['owner', 'hrd', 'manager', 'pic', 'staff'])->default('staff');
+
+            // Supervisor → untuk relasi atasan-bawahan
+            $table->foreignId('supervisor_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
+
             $table->rememberToken();
             $table->timestamps();
         });
+
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();

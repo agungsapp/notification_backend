@@ -8,6 +8,27 @@
 						</a>
 				</li>
 
+				<li class="nav-item {{ request()->is('data-pengguna*') ? 'active' : '' }}">
+						<a class="nav-link" href="{{ route('data-pengguna') }}">
+								<i class="icon-grid menu-icon"></i>
+								<span class="menu-title">Data Pengguna</span>
+						</a>
+				</li>
+
+				<li class="nav-item {{ request()->is('evaluation-question*') ? 'active' : '' }}">
+						<a class="nav-link" href="{{ route('evaluation-question') }}">
+								<i class="icon-grid menu-icon"></i>
+								<span class="menu-title">Evaluation Question</span>
+						</a>
+				</li>
+
+				<li class="nav-item {{ request()->is('evaluation-form*') ? 'active' : '' }}">
+						<a class="nav-link" href="{{ route('evaluation-form') }}">
+								<i class="icon-grid menu-icon"></i>
+								<span class="menu-title">Evaluation Form</span>
+						</a>
+				</li>
+
 				<li class="nav-item {{ request()->is('manage-memo*') ? 'active' : '' }}">
 						<a class="nav-link" href="{{ route('manage-memo') }}">
 								<i class="icon-grid menu-icon"></i>
@@ -15,12 +36,7 @@
 						</a>
 				</li>
 
-				<li class="nav-item">
-						<a class="nav-link" href="../../index.html">
-								<i class="icon-grid menu-icon"></i>
-								<span class="menu-title">Data Pengguna</span>
-						</a>
-				</li>
+
 				<li class="nav-item">
 						<form action="{{ route('logout') }}" method="POST">
 								@csrf
