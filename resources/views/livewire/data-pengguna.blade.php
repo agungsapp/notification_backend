@@ -97,7 +97,7 @@
 						<div class="card">
 								<div class="card-body">
 										<div class="row">
-												<div class="col-md-3">
+												<div class="col-md-2">
 														<h4 class="card-title">Filter Position</h4>
 														<div class="d-flex flex-column gap-2">
 																<button class="btn btn-sm {{ $filterPosition == '' ? 'btn-primary' : 'btn-outline-primary' }}"
@@ -108,7 +108,7 @@
 																@endforeach
 														</div>
 												</div>
-												<div class="col-md-9">
+												<div class="col-md-10">
 														<div class="d-flex justify-content-between mb-3">
 																<h4 class="card-title">Daftar Pengguna</h4>
 																<div class="input-group w-25">
