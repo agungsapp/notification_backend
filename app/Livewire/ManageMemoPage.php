@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Memo;
+use App\Services\OneSignalService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -59,8 +60,8 @@ class ManageMemoPage extends Component
 
         // jika status = sent, trigger event / job untuk kirim FCM (implementasikan job terpisah)
         if ($memo->status === 'sent') {
-            // dispatch(new \App\Jobs\SendMemoNotification($memo));
-            // atau event(new \App\Events\MemoSent($memo));
+            $signal = new OneSignalService();
+            $signal->sendToAllSubscribed($memo->title, $memo->body);
         }
 
         session()->flash('success', 'Memo berhasil dibuat.');

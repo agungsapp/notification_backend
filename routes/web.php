@@ -6,6 +6,7 @@ use App\Livewire\DataPengguna;
 use App\Livewire\EvaluationFormPage;
 use App\Livewire\EvaluationQuestionPage;
 use App\Livewire\ManageMemoPage;
+use App\Services\OneSignalService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -30,4 +31,11 @@ Route::middleware('auth')->group(function () {
     Route::get('evaluation-question', EvaluationQuestionPage::class)->name('evaluation-question');
     Route::get('evaluation-form', EvaluationFormPage::class)->name('evaluation-form');
     Route::get('manage-memo', ManageMemoPage::class)->name('manage-memo');
+});
+
+
+Route::get('/debug', function () {
+    $signal = new OneSignalService();
+    $hasil = $signal->sendToAllSubscribed('test ini dari controller', 'ya hari ini kita semuanya akan libur ya bolo');
+    return response()->json($hasil);
 });
