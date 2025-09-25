@@ -112,8 +112,8 @@ class ManageMemoPage extends Component
         $memo = Memo::findOrFail($id);
         if ($memo->status !== 'sent') {
             $memo->update(['status' => 'sent', 'sent_at' => now()]);
-            // dispatch send job
-            // dispatch(new \App\Jobs\SendMemoNotification($memo));
+            $signal = new OneSignalService();
+            $signal->sendToAllSubscribed($memo->title, $memo->body);
             session()->flash('success', 'Memo berhasil dikirim (published).');
         }
     }
