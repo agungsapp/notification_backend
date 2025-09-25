@@ -28,10 +28,10 @@
 				<!-- partial:../../partials/_navbar.html -->
 				<nav class="navbar col-lg-12 col-12 fixed-top d-flex flex-row p-0">
 						<div class="navbar-brand-wrapper d-flex align-items-center justify-content-start text-center">
-								<a class="navbar-brand brand-logo me-5" href="../../index.html"><img src="{{ asset('sky') }}/images/logo.svg"
+								<a class="navbar-brand brand-logo me-5" href="/"><img src="{{ asset('in') }}/logo-panjang.png"
 												class="me-2" alt="logo" /></a>
-								<a class="navbar-brand brand-logo-mini" href="../../index.html"><img
-												src="{{ asset('sky') }}/images/logo-mini.svg" alt="logo" /></a>
+								<a class="navbar-brand brand-logo-mini" href="/"><img src="{{ asset('in') }}/logo-panjang.png"
+												alt="logo" /></a>
 						</div>
 						<div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
 								<button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -152,6 +152,9 @@
 				</div>
 				<!-- page-body-wrapper ends -->
 		</div>
+
+
+
 		<!-- container-scroller -->
 		<!-- plugins:js -->
 		<script src="{{ asset('sky') }}/vendors/js/vendor.bundle.base.js"></script>
@@ -166,6 +169,17 @@
 		<!-- endinject -->
 		<!-- Custom js for this page-->
 		<!-- End custom js for this page-->
+		<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+		<script>
+				window.OneSignalDeferred = window.OneSignalDeferred || [];
+				OneSignalDeferred.push(async function(OneSignal) {
+						await OneSignal.init({
+								appId: "eee77d3b-13ec-488a-9aac-09abf6794764",
+						});
+
+						console.log(OneSignal)
+				});
+		</script>
 </body>
 
 </html>

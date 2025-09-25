@@ -19,24 +19,36 @@ class DataPengguna extends Component
     public $userId;
     public $isEdit = false;
     public $search = '';
-    public $filterPosition = ''; // Variabel untuk filter position
-
-    protected $rules = [
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|max:255|unique:users,email',
-        'password' => 'required|string|min:8',
-        'role' => 'required|in:admin,manager,employee',
-        'position' => 'required|in:owner,hrd,manager,pic,staff',
-        'supervisor_id' => 'nullable|exists:users,id',
-    ];
+    public $filterPosition = '';
 
     protected $paginationTheme = 'bootstrap';
+
+    protected function rules()
+    {
+        $rules = [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8',
+            'role' => 'required|in:admin,manager,employee',
+            'position' => 'required|in:owner,hrd,manager,pic,staff',
+            'supervisor_id' => 'nullable|exists:users,id',
+        ];
+
+        if ($this->isEdit) {
+            $rules['email'] = 'required|email|max:255|unique:users,email,' . $this->userId;
+            $rules['password'] = 'nullable|string|min:8';
+        }
+
+        return $rules;
+    }
 
     public function render()
     {
         $query = User::with('supervisor')
-            ->when($this->search, fn($q) => $q->where('name', 'like', '%' . $this->search . '%')
-                ->orWhere('email', 'like', '%' . $this->search . '%'))
+            ->when($this->search, fn($q) => $q->where(function ($q) {
+                $q->where('name', 'like', '%' . $this->search . '%')
+                    ->orWhere('email', 'like', '%' . $this->search . '%');
+            }))
             ->when($this->filterPosition, fn($q) => $q->where('position', $this->filterPosition));
 
         $users = $query->latest('created_at')->paginate(10);
@@ -48,7 +60,7 @@ class DataPengguna extends Component
     public function filterByPosition($position)
     {
         $this->filterPosition = $position;
-        $this->resetPage(); // Reset pagination saat filter berubah
+        $this->resetPage();
     }
 
     public function resetFilter()
@@ -90,9 +102,6 @@ class DataPengguna extends Component
         $this->position = $user->position;
         $this->supervisor_id = $user->supervisor_id;
         $this->isEdit = true;
-
-        $this->rules['email'] = 'required|email|max:255|unique:users,email,' . $this->userId;
-        $this->rules['password'] = 'nullable|string|min:8';
     }
 
     public function update()
