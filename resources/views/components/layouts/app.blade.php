@@ -152,6 +152,35 @@
 				</div>
 				<!-- page-body-wrapper ends -->
 		</div>
+
+		<script>
+				// Import the functions you need from the SDKs you need
+				import {
+						initializeApp
+				} from "firebase/app";
+				import {
+						getAnalytics
+				} from "firebase/analytics";
+				// TODO: Add SDKs for Firebase products that you want to use
+				// https://firebase.google.com/docs/web/setup#available-libraries
+
+				// Your web app's Firebase configuration
+				// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+				const firebaseConfig = {
+						apiKey: "AIzaSyBiCEggnrsdPpag73QUd0zn7kmmHc9heXI",
+						authDomain: "notification-1ece1.firebaseapp.com",
+						projectId: "notification-1ece1",
+						storageBucket: "notification-1ece1.firebasestorage.app",
+						messagingSenderId: "634083829910",
+						appId: "1:634083829910:web:ba5d8bac45eb7811fd3ab7",
+						measurementId: "G-0VJ35Y3E61"
+				};
+
+				// Initialize Firebase
+				const app = initializeApp(firebaseConfig);
+				const analytics = getAnalytics(app);
+		</script>
+
 		<!-- container-scroller -->
 		<!-- plugins:js -->
 		<script src="{{ asset('sky') }}/vendors/js/vendor.bundle.base.js"></script>
