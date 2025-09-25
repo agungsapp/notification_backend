@@ -93,7 +93,8 @@ class ManageMemoPage extends Component
         ]);
 
         if ($memo->status === 'sent') {
-            // dispatch(new \App\Jobs\SendMemoNotification($memo));
+            $signal = new OneSignalService();
+            $signal->sendToAllSubscribed($memo->title, $memo->body);
         }
 
         session()->flash('success', 'Memo berhasil diperbarui.');
